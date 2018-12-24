@@ -40,6 +40,8 @@ public class TssApplicationTests {
         indexWriter.commit();
         indexWriter.close();
     }
+    public void test1(){
 
+    }
 }
 
