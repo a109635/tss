@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 
+	namespace: 指定当前mapper.xml管理的接口 全限定名
+	注意：一个mapper.xml只能管理一个接口
+-->
+<mapper namespace="com.baizhi.dao.PoetryDao">
+    <resultMap id="tss" type="Poetry">
+        <id property="id" column="p1_id"/>
+        <result property="title" column="p1_title"/>
+        <result property="content" column="p1_content"/>
+        <association property="poets" javaType="Poets">
+            <id property="id" column="p2_id"/>
+            <result property="name" column="p2_name"/>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="tss">
+      SELECT
+            p1.id p1_id,
+            p1.title p1_title,
+            p1.content p1_content,
+            p2.id p2_id,
+            p2.name p2_name
+        FROM
+            poetries p1
+        LEFT JOIN poets p2 ON p1.poet_id = p2.id
+    </select>
+
+</mapper>
